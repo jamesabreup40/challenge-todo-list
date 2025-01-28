@@ -1,7 +1,6 @@
 package com.stefanini.challenge.todo.infra.controller;
 
 import com.stefanini.challenge.todo.core.usecase.CreateTaskUseCase;
-import com.stefanini.challenge.todo.infra.adapter.TaskAdapterGateway;
 import com.stefanini.challenge.todo.infra.adapter.TaskMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,6 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping("tasks")
 @RequiredArgsConstructor
 public class TaskController {
-    private final TaskAdapterGateway taskAdapterGateway;
     private final CreateTaskUseCase createTaskUseCase;
 
     @PostMapping
