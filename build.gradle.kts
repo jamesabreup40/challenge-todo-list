@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.4.2"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("org.flywaydb.flyway") version "6.4.3"
 }
 
 group = "com.stefanini.challenge"
@@ -33,7 +34,6 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:${mapStructVersion}")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.microsoft.sqlserver:mssql-jdbc")
-	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	annotationProcessor("org.projectlombok:lombok")
 	annotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
