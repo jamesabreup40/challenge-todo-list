@@ -1,6 +1,7 @@
 package com.stefanini.challenge.todo.infra.config;
 
 import com.stefanini.challenge.todo.core.usecase.CreateTaskUseCase;
+import com.stefanini.challenge.todo.core.usecase.EditTaskUseCase;
 import com.stefanini.challenge.todo.infra.adapter.TaskAdapterGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,11 @@ public class IocConfig {
     @Bean
     public CreateTaskUseCase createTaskUseCase() {
         return new CreateTaskUseCase(taskAdapterGateway);
+    }
+
+    @Bean
+    public EditTaskUseCase editTaskUseCase() {
+        return new EditTaskUseCase(taskAdapterGateway);
     }
 
 }

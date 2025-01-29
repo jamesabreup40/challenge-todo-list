@@ -3,6 +3,7 @@ package com.stefanini.challenge.todo.core.adapter;
 import com.stefanini.challenge.todo.core.domain.Task;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface TaskAdapter {
 
@@ -10,7 +11,7 @@ public interface TaskAdapter {
 
     List<Task> list();
 
-    Task edit(Task toEditTask);
+    Task edit(UUID taskId, Task taskToEdit);
 
-    void delete(Task toDeleteTask);
+    void delete(UUID taskIdToDelete);
 }

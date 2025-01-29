@@ -5,13 +5,14 @@ import com.stefanini.challenge.todo.core.domain.Task;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class DeleteTaskUseCase {
     private final TaskAdapter taskAdapter;
 
-    void delete(Task toDeleteTask) {
-        taskAdapter.delete(toDeleteTask);
+    public void delete(UUID taskIdToDelete) {
+        taskAdapter.delete(taskIdToDelete);
     }
 
 }
