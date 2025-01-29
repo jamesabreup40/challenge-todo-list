@@ -58,4 +58,14 @@ public class TaskController {
         }
     }
 
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<Void> deleteTask(@PathVariable UUID taskId) {
+        try {
+            deleteTaskUseCase.delete(taskId);
+            return status(OK).build();
+        } catch (TaskNotFoundException e) {
+            return status(NOT_FOUND).build();
+        }
+    }
+
 }
