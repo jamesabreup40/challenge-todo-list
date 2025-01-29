@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static com.stefanini.challenge.todo.infra.adapter.TaskMapper.TASK_MAPPER;
+import static java.util.stream.StreamSupport.stream;
 
 @Component
 @RequiredArgsConstructor
@@ -27,7 +30,8 @@ public class TaskAdapterGateway implements TaskAdapter {
 
     @Override
     public List<Task> list() {
-        return List.of();
+        return stream(taskRepository.findAll().spliterator(), false)
+                .map(TASK_MAPPER::toDomain).toList();
     }
 
     @Override

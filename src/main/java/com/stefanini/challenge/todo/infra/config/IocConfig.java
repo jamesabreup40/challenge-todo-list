@@ -3,6 +3,7 @@ package com.stefanini.challenge.todo.infra.config;
 import com.stefanini.challenge.todo.core.usecase.CreateTaskUseCase;
 import com.stefanini.challenge.todo.core.usecase.DeleteTaskUseCase;
 import com.stefanini.challenge.todo.core.usecase.EditTaskUseCase;
+import com.stefanini.challenge.todo.core.usecase.ListTaskUseCase;
 import com.stefanini.challenge.todo.infra.adapter.TaskAdapterGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,11 @@ public class IocConfig {
     @Bean
     public DeleteTaskUseCase deleteTaskUseCase() {
         return new DeleteTaskUseCase(taskAdapterGateway);
+    }
+
+    @Bean
+    public ListTaskUseCase listTaskUseCase() {
+        return new ListTaskUseCase(taskAdapterGateway);
     }
 
 }
