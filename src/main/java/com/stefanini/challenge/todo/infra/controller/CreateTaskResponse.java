@@ -1,11 +1,12 @@
 package com.stefanini.challenge.todo.infra.controller;
 
-import com.stefanini.challenge.todo.core.domain.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 public record CreateTaskResponse(String title,
                                  String description,
-                                 ZonedDateTime createdAt,
-                                 Status status) {
+                                 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+                                 LocalDateTime createdAt,
+                                 String status) {
 }
