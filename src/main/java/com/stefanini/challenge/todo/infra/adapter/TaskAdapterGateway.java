@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
+
+import static com.stefanini.challenge.todo.infra.adapter.TaskMapper.TASK_MAPPER;
 
 @Component
 @RequiredArgsConstructor
@@ -15,9 +18,9 @@ public class TaskAdapterGateway implements TaskAdapter {
 
     @Override
     public Task create(Task newDomainTask) {
-        return TaskMapper.INSTANCE.toDomain(
+        return TASK_MAPPER.toDomain(
                 taskRepository.save(
-                        TaskMapper.INSTANCE.toEntity(newDomainTask)
+                        TASK_MAPPER.toEntity(newDomainTask)
                 )
         );
     }
@@ -28,12 +31,21 @@ public class TaskAdapterGateway implements TaskAdapter {
     }
 
     @Override
-    public Task edit(Task domainTaskToEdit) {
-        return null;
+    public Task edit(UUID taskId, Task taskToEdit) {
+        return taskRepository.findByTaskId(taskId)
+                .map(actualTaskEntity -> {
+                    actualTaskEntity.setTitle(taskToEdit.getTitle());
+                    actualTaskEntity.setDescription(taskToEdit.getDescription());
+                    actualTaskEntity.setStatus(taskToEdit.getStatus().name());
+                    taskRepository.save(actualTaskEntity);
+                    return TASK_MAPPER.toDomain(actualTaskEntity);
+                })
+                .orElseThrow();
     }
 
     @Override
-    public void delete(Task domainTaskToDelete) {
-
+    public void delete(UUID taskId) {
+        var actualTaskEntity = taskRepository.findByTaskId(taskId).orElseThrow();
+        taskRepository.delete(actualTaskEntity);
     }
 }
