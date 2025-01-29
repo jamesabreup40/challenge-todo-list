@@ -5,17 +5,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
-@Table("tasks")
-public class TaskEntity {
-
-    @Id
-    private Long id;
-    private String title;
-    private String description;
-    @Column("created_date")
-    private ZonedDateTime createdAt;
-    private String status;
-
+@Table("TASKS")
+public record TaskEntity(
+        @Id @Column("ID") Long id,
+        @Column("TITLE") String title,
+        @Column("DESCRIPTION") String description,
+        @Column("CREATED_DATE") LocalDateTime createdAt,
+        @Column("STATUS") String status
+) {
 }

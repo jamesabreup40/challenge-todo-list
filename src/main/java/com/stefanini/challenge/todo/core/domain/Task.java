@@ -1,10 +1,17 @@
 package com.stefanini.challenge.todo.core.domain;
 
-import java.time.ZonedDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-public record Task(
-        String title,
-        String description,
-        ZonedDateTime createdAt,
-        Status status) {
+import java.time.LocalDateTime;
+
+@Data
+@AllArgsConstructor
+public class Task {
+
+    private String title;
+    private String description;
+    private LocalDateTime createdAt;
+    private TaskStatus status;
+
 }

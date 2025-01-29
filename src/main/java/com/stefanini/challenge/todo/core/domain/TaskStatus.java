@@ -1,5 +1,5 @@
 package com.stefanini.challenge.todo.core.domain;
 
-public enum Status {
+public enum TaskStatus {
     PENDING, IN_PROGRESS, COMPLETED
 }

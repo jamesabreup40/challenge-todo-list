@@ -4,11 +4,16 @@ import com.stefanini.challenge.todo.core.adapter.TaskAdapter;
 import com.stefanini.challenge.todo.core.domain.Task;
 import lombok.RequiredArgsConstructor;
 
+import static com.stefanini.challenge.todo.core.domain.TaskStatus.PENDING;
+import static java.time.LocalDateTime.now;
+
 @RequiredArgsConstructor
 public class CreateTaskUseCase {
     private final TaskAdapter taskAdapter;
 
     public Task create(Task newTask) {
+        newTask.setCreatedAt(now());
+        newTask.setStatus(PENDING);
         return taskAdapter.create(newTask);
     }
 
