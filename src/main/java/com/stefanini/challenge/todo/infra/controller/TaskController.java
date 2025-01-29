@@ -3,6 +3,7 @@ package com.stefanini.challenge.todo.infra.controller;
 import com.stefanini.challenge.todo.core.usecase.CreateTaskUseCase;
 import com.stefanini.challenge.todo.core.usecase.DeleteTaskUseCase;
 import com.stefanini.challenge.todo.core.usecase.EditTaskUseCase;
+import com.stefanini.challenge.todo.core.usecase.ListTaskUseCase;
 import com.stefanini.challenge.todo.core.usecase.exception.TaskNotFoundException;
 import com.stefanini.challenge.todo.infra.controller.dto.CreateTaskRequest;
 import com.stefanini.challenge.todo.infra.controller.dto.CreateTaskResponse;
@@ -11,6 +12,7 @@ import com.stefanini.challenge.todo.infra.controller.dto.EditTaskResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 import static com.stefanini.challenge.todo.infra.adapter.TaskMapper.TASK_MAPPER;
@@ -33,6 +36,16 @@ public class TaskController {
     private final CreateTaskUseCase createTaskUseCase;
     private final EditTaskUseCase editTaskUseCase;
     private final DeleteTaskUseCase deleteTaskUseCase;
+    private final ListTaskUseCase listTaskUseCase;
+
+    @GetMapping
+    public ResponseEntity<List<CreateTaskResponse>> createTask() {
+        return status(OK).body(listTaskUseCase.list()
+                .stream()
+                .map(TASK_MAPPER::createdDomainToResponse)
+                .toList()
+        );
+    }
 
     @PostMapping
     public ResponseEntity<CreateTaskResponse> createTask(@RequestBody CreateTaskRequest createTaskRequest) {
@@ -47,7 +60,7 @@ public class TaskController {
     @PutMapping("/{taskId}")
     public ResponseEntity<EditTaskResponse> editTask(@PathVariable UUID taskId, @RequestBody EditTaskRequest editTaskRequest) {
         try {
-            return status(OK).body(TASK_MAPPER.editDomainToResponse(
+            return status(OK).body(TASK_MAPPER.editedDomainToResponse(
                     editTaskUseCase.edit(
                             taskId,
                             TASK_MAPPER.editRequestToDomain(editTaskRequest)

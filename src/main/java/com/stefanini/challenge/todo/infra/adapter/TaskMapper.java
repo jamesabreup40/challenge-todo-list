@@ -24,5 +24,5 @@ public interface TaskMapper {
 
     Task editRequestToDomain(EditTaskRequest editTaskRequest);
 
-    EditTaskResponse editDomainToResponse(Task editedDomainTask);
+    EditTaskResponse editedDomainToResponse(Task editedDomainTask);
 }

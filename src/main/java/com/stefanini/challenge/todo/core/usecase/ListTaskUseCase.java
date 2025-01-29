@@ -10,7 +10,7 @@ import java.util.List;
 public class ListTaskUseCase {
     private final TaskAdapter taskAdapter;
 
-    List<Task> list() {
+    public List<Task> list() {
         return taskAdapter.list();
     }
 
