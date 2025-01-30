@@ -34,6 +34,7 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:${mapStructVersion}")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.microsoft.sqlserver:mssql-jdbc")
+	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	annotationProcessor("org.projectlombok:lombok")
 	annotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
